@@ -158,7 +158,7 @@ show_devices() {
 		devpath=`cd "$device" && pwd -P`
 		location='@'`attr_clean "$device/location"`
 		hardware_id=`attr_clean "$device/hardware_id"`
-		for local_spanno in `cut -d: -f1 "$device/spantype"`
+		for local_spanno in `cut -d: -f1 "$device/dahdi_spantype"`
 		do
 			span=`grep 2>/dev/null -Hw "$local_spanno" "$device/span-"*"/local_spanno" | \
 				sed -e 's,/local_spanno:.*,,' -e 's,.*/,,'`
@@ -193,7 +193,7 @@ dump_config() {
 			id="$devpath"
 		fi
 		echo "# Device: [$hardware_id] @$location $devpath"
-		for local_spanno in `cut -d: -f1 "$device/spantype"`
+		for local_spanno in `cut -d: -f1 "$device/dahdi_spantype"`
 		do
 			span=`grep 2>/dev/null -Hw "$local_spanno" "$device/span-"*"/local_spanno" | \
 				sed -e 's,/local_spanno:.*,,' -e 's,.*/,,'`
@@ -358,7 +358,7 @@ list_devices() {
 		devpath=`cd "$device" && pwd -P`
 		location='@'`attr_clean "$device/location"`
 		hardware_id=`attr_clean "$device/hardware_id"`
-		for local_spanno in `cut -d: -f1 "$device/spantype"`
+		for local_spanno in `cut -d: -f1 "$device/dahdi_spantype"`
 		do
 			found=`dev_match_conf "$devpath" "$location" "$hardware_id" "$local_spanno"`
 			if [ "$wanted" = "unmatched" ]; then
